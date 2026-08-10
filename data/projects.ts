@@ -14,8 +14,8 @@ export type Project = {
 
 export const PROJECTS: Project[] = [
   {
-    name: "AURA OS",
-    tagline: "AI agent that does more than chat",
+    name: "JARVIS AI Agent",
+    tagline: "AI agent that does more than just chat",
     description:
       "An AI agent system with a working tool-calling loop that queries real Postgres data. Built with FastAPI backend and planned Next.js frontend. The kind of project you keep building late at night.",
     problem:

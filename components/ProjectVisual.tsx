@@ -17,8 +17,7 @@ export function ProjectVisual({ project }: { project: Project }) {
       return <ScraperVisual />;
     case "gambling":
       return <GamblingVisual />;
-    case "techsspire":
-      return <TechsspireVisual />;
+
   }
 }
 
@@ -130,29 +129,6 @@ function ScraperVisual() {
   );
 }
 
-function TechsspireVisual() {
-  return (
-    <Frame>
-      <div className="relative z-10 grid grid-cols-3 gap-2">
-        {["A", "B", "C", "D", "E", "F"].map((g, i) => (
-          <div
-            key={g}
-            className={`glass rounded-lg p-2 ${i % 2 ? "translate-y-2" : ""}`}
-          >
-            <div className="flex aspect-square items-center justify-center rounded-md bg-gradient-to-br from-accent/30 to-accent-warm/25">
-              <Globe className="h-4 w-4 text-accent" />
-            </div>
-            <div className="mt-1.5 h-1 w-full rounded bg-white/20" />
-            <div className="mt-1 h-1 w-2/3 rounded bg-white/10" />
-          </div>
-        ))}
-      </div>
-      <div className="absolute right-7 top-7 flex h-8 w-8 items-center justify-center rounded-full bg-accent/15 ring-1 ring-accent/30">
-        <ArrowUpRight className="h-4 w-4 text-accent" />
-      </div>
-    </Frame>
-  );
-}
 
 function GamblingVisual() {
   return (
