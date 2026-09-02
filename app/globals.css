@@ -1,16 +1,16 @@
 @import "tailwindcss";
 
 :root {
-  /* Core palette — dark editorial, warm tones with a gold accent */
-  --background: #12161a;
-  --foreground: #e6e1dc;
-  --muted: #9b9590;
-  --muted-2: #6b6560;
-  --accent: #d4af37;
-  --accent-2: #b8962e;
-  --accent-warm: #8b7355;
-  --border-subtle: rgba(230, 225, 220, 0.08);
-  --glass: rgba(230, 225, 220, 0.03);
+  /* Premium palette — deep navy, teal, amber & coral accents */
+  --background: #0d0e18;
+  --foreground: #f5f3f5;
+  --muted: #7d858e;
+  --muted-2: #4b5262;
+  --accent: #f0a500;
+  --accent-2: #e07a5f;
+  --accent-warm: #b15d4f;
+  --border-subtle: rgba(245, 243, 245, 0.08);
+  --glass: rgba(245, 243, 245, 0.03);
 }
 
 @theme inline {
