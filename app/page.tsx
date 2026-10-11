@@ -7,7 +7,6 @@ import { Journey } from "@/components/Journey";
 import { GitHub } from "@/components/GitHub";
 import { Contact } from "@/components/Contact";
 import { Footer } from "@/components/Footer";
-import { CursorGlow } from "@/components/CursorGlow";
 import { ScrollProgress } from "@/components/ScrollProgress";
 
 export default function Home() {
@@ -25,7 +24,6 @@ export default function Home() {
         <Contact />
       </main>
       <Footer />
-      <CursorGlow />
     </>
   );
 }
