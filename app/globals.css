@@ -1,38 +1,48 @@
 @import "tailwindcss";
 
 :root {
-  /* Premium palette — deep navy, teal, amber & coral accents */
-  --background: #0d0e18;
-  --foreground: #f5f3f5;
-  --muted: #7d858e;
-  --muted-2: #4b5262;
-  --accent: #f0a500;
-  --accent-2: #e07a5f;
-  --accent-warm: #b15d4f;
-  --border-subtle: rgba(245, 243, 245, 0.08);
-  --glass: rgba(245, 243, 245, 0.03);
+  /* --- Dark soft-clay palette -------------------------------------------------
+     A calm, low-saturation base with pastel accents. Clay surfaces are built
+     from a soft outer drop shadow plus a light/dark double inner shadow, which
+     is what gives them their "pressed from clay" feel. */
+  --background: #14151c;
+  --surface: #1d1f28;
+  --surface-raised: #23252f;
+  --foreground: #eceef4;
+  --muted: #9aa1b3;
+  --muted-2: #6d7486;
+
+  --accent: #a9a4f2; /* soft lavender */
+  --accent-2: #8fd8c2; /* mint */
+  --accent-3: #f0b79f; /* peach */
+  --accent-ink: #191a22; /* readable ink on pastel surfaces */
+
+  /* Clay shading primitives */
+  --clay-light: rgba(255, 255, 255, 0.055);
+  --clay-dark: rgba(0, 0, 0, 0.48);
+  --border-subtle: rgba(255, 255, 255, 0.07);
 }
 
 @theme inline {
   --color-background: var(--background);
+  --color-surface: var(--surface);
+  --color-surface-raised: var(--surface-raised);
   --color-foreground: var(--foreground);
   --color-muted: var(--muted);
   --color-muted-2: var(--muted-2);
   --color-accent: var(--accent);
   --color-accent-2: var(--accent-2);
-  --color-accent-warm: var(--accent-warm);
+  --color-accent-3: var(--accent-3);
+  --color-accent-ink: var(--accent-ink);
   --font-sans: var(--font-inter);
-  --font-display: var(--font-playfair-display);
+  --font-display: var(--font-nunito);
 }
 
 @layer base {
-  * {
-    border-color: var(--border-subtle);
-  }
-
   html {
     scroll-behavior: smooth;
-    scroll-padding-top: 5rem;
+    scroll-padding-top: 6rem;
+    -webkit-tap-highlight-color: transparent;
   }
 
   body {
@@ -40,105 +50,253 @@
     color: var(--foreground);
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
     overflow-x: hidden;
   }
 
-  /* Playfair reads better with a touch more air between letters */
+  /* A very soft vertical wash keeps the dark base from feeling flat. */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background:
+      radial-gradient(60rem 40rem at 15% -10%, rgba(169, 164, 242, 0.09), transparent 60%),
+      radial-gradient(50rem 35rem at 90% 5%, rgba(143, 216, 194, 0.06), transparent 60%),
+      radial-gradient(45rem 35rem at 50% 110%, rgba(240, 183, 159, 0.05), transparent 60%);
+  }
+
   h1,
   h2,
   h3,
   h4,
   h5,
   h6 {
-    letter-spacing: 0.02em;
+    letter-spacing: -0.01em;
+  }
+
+  /* Calm, accessible focus ring everywhere. */
+  :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 0.75rem;
   }
 
   ::selection {
-    background: rgba(212, 175, 55, 0.3);
+    background: rgba(169, 164, 242, 0.28);
     color: #fff;
   }
 
-  /* Subtle custom scrollbar */
+  /* Soft, rounded scrollbar to match the clay surfaces. */
   ::-webkit-scrollbar {
-    width: 10px;
+    width: 12px;
   }
   ::-webkit-scrollbar-track {
-    background: #0d0f12;
+    background: var(--background);
   }
   ::-webkit-scrollbar-thumb {
-    background: rgba(230, 225, 220, 0.12);
-    border-radius: 8px;
-    border: 2px solid #0d0f12;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 999px;
+    border: 3px solid var(--background);
   }
   ::-webkit-scrollbar-thumb:hover {
-    background: rgba(212, 175, 55, 0.5);
+    background: rgba(169, 164, 242, 0.45);
   }
 }
 
 @layer utilities {
-  /* Subtle animated grid background */
-  .bg-grid {
-    background-image: linear-gradient(
-        to right,
-        rgba(230, 225, 220, 0.04) 1px,
-        transparent 1px
-      ),
-      linear-gradient(to bottom, rgba(230, 225, 220, 0.04) 1px, transparent 1px);
-    background-size: 64px 64px;
+  /* --- Clay surfaces -------------------------------------------------------- */
+
+  /* The core clay slab: rounded, gently lit from the top-left, softly dented. */
+  .clay {
+    background-image: linear-gradient(150deg, var(--surface-raised), var(--surface));
+    box-shadow:
+      10px 12px 24px -8px var(--clay-dark),
+      -8px -8px 20px -6px var(--clay-light),
+      inset 2px 2px 3px -1px rgba(255, 255, 255, 0.07),
+      inset -3px -3px 8px -2px rgba(0, 0, 0, 0.32);
   }
 
-  .bg-noise {
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.4'/%3E%3C/svg%3E");
+  /* Shallower variant for chips, small tiles and inline wells. */
+  .clay-sm {
+    background-image: linear-gradient(150deg, #262833, #1e2028);
+    box-shadow:
+      5px 6px 12px -4px var(--clay-dark),
+      -4px -4px 10px -4px var(--clay-light),
+      inset 1px 1px 2px rgba(255, 255, 255, 0.06),
+      inset -2px -2px 5px rgba(0, 0, 0, 0.3);
   }
 
-  /* Glass / transparent dark surface */
-  .glass {
-    background: var(--glass);
-    border: 1px solid var(--border-subtle);
+  /* Pressed-in well — the inverse of clay, for insets. */
+  .clay-inset {
+    background-color: #191b23;
+    box-shadow:
+      inset 4px 4px 9px -3px rgba(0, 0, 0, 0.55),
+      inset -3px -3px 8px -3px rgba(255, 255, 255, 0.045);
   }
 
-  /* Gradient text accent — gold sheen */
+  /* Clay responds to touch: lift on hover, squash in on press. */
+  .clay-interactive {
+    transition:
+      transform 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+      box-shadow 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+    will-change: transform;
+  }
+  .clay-interactive:hover {
+    transform: translateY(-4px);
+    box-shadow:
+      16px 20px 34px -10px rgba(0, 0, 0, 0.55),
+      -10px -10px 24px -8px rgba(255, 255, 255, 0.07),
+      inset 2px 2px 3px -1px rgba(255, 255, 255, 0.09),
+      inset -3px -3px 8px -2px rgba(0, 0, 0, 0.32);
+  }
+  .clay-interactive:active {
+    transform: translateY(-1px) scale(0.996);
+    box-shadow:
+      4px 5px 12px -6px var(--clay-dark),
+      inset 4px 4px 10px -3px rgba(0, 0, 0, 0.55),
+      inset -3px -3px 8px -3px rgba(255, 255, 255, 0.05);
+  }
+
+  /* Puffy pastel pill — the primary call to action. */
+  .clay-pill {
+    background-image: linear-gradient(150deg, #b6b1f7, #9993ee);
+    color: var(--accent-ink);
+    box-shadow:
+      8px 10px 20px -8px var(--clay-dark),
+      -6px -6px 16px -8px var(--clay-light),
+      inset 2px 2px 3px -1px rgba(255, 255, 255, 0.35),
+      inset -3px -3px 8px -3px rgba(0, 0, 0, 0.22);
+    transition:
+      transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+      box-shadow 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+      filter 0.4s ease;
+  }
+  .clay-pill:hover {
+    transform: translateY(-2px);
+    filter: brightness(1.05);
+    box-shadow:
+      12px 16px 28px -10px var(--clay-dark),
+      -8px -8px 20px -8px var(--clay-light),
+      inset 2px 2px 3px -1px rgba(255, 255, 255, 0.4),
+      inset -3px -3px 8px -3px rgba(0, 0, 0, 0.22);
+  }
+  .clay-pill:active {
+    transform: translateY(0) scale(0.99);
+    box-shadow:
+      inset 4px 4px 10px -3px rgba(0, 0, 0, 0.3),
+      inset -3px -3px 8px -3px rgba(255, 255, 255, 0.25);
+  }
+
+  /* Neutral puffy pill for secondary actions. */
+  .clay-pill-quiet {
+    background-image: linear-gradient(150deg, #262833, #1e2028);
+    color: var(--foreground);
+    box-shadow:
+      8px 10px 20px -8px var(--clay-dark),
+      -6px -6px 16px -8px var(--clay-light),
+      inset 2px 2px 3px -1px rgba(255, 255, 255, 0.07),
+      inset -3px -3px 8px -2px rgba(0, 0, 0, 0.3);
+    transition:
+      transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+      box-shadow 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .clay-pill-quiet:hover {
+    transform: translateY(-2px);
+    box-shadow:
+      12px 16px 28px -10px var(--clay-dark),
+      -8px -8px 20px -8px rgba(255, 255, 255, 0.06),
+      inset 2px 2px 3px -1px rgba(255, 255, 255, 0.09),
+      inset -3px -3px 8px -2px rgba(0, 0, 0, 0.3);
+  }
+  .clay-pill-quiet:active {
+    transform: translateY(0) scale(0.99);
+    box-shadow:
+      inset 4px 4px 10px -3px rgba(0, 0, 0, 0.5),
+      inset -3px -3px 8px -3px rgba(255, 255, 255, 0.04);
+  }
+
+  /* Small puffy icon tile. */
+  .clay-icon {
+    background-image: linear-gradient(150deg, #292b36, #20222b);
+    box-shadow:
+      5px 6px 12px -4px var(--clay-dark),
+      -4px -4px 10px -4px var(--clay-light),
+      inset 1px 1px 2px rgba(255, 255, 255, 0.08),
+      inset -2px -2px 5px rgba(0, 0, 0, 0.28);
+  }
+
+  /* Soft pastel text accent. */
   .text-gradient {
-    background: linear-gradient(
-      135deg,
-      #e9cf5a 0%,
-      #d4af37 45%,
-      #c49a2e 100%
-    );
+    background: linear-gradient(115deg, #c4c0fb 0%, #a9a4f2 45%, #8fd8c2 100%);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
   }
 
-  /* Animated gradient border glow */
-  .glow-border {
-    position: relative;
+  /* Blurred clay blobs used as ambient background decoration. */
+  .clay-blob {
+    filter: blur(90px);
+    border-radius: 999px;
   }
-  .glow-border::before {
-    content: "";
-    position: absolute;
-    inset: -1px;
-    border-radius: inherit;
-    padding: 1px;
-    background: linear-gradient(
-      135deg,
-      rgba(212, 175, 55, 0.45),
-      rgba(139, 115, 85, 0.3),
-      transparent 60%
-    );
-    -webkit-mask:
-      linear-gradient(#fff 0 0) content-box,
-      linear-gradient(#fff 0 0);
-    mask:
-      linear-gradient(#fff 0 0) content-box,
-      linear-gradient(#fff 0 0);
-    -webkit-mask-composite: xor;
-    mask-composite: exclude;
-    pointer-events: none;
-    opacity: 0;
-    transition: opacity 0.3s ease;
+
+  /* Gentle looping motion used by the project visuals. */
+  @keyframes clay-pulse {
+    0%,
+    100% {
+      transform: scale(0.92);
+      opacity: 0.45;
+    }
+    50% {
+      transform: scale(1.12);
+      opacity: 1;
+    }
   }
-  .glow-border:hover::before {
-    opacity: 1;
+  @keyframes clay-rise {
+    from {
+      transform: translateY(8px) rotateX(65deg);
+      opacity: 0;
+    }
+    to {
+      transform: none;
+      opacity: 1;
+    }
+  }
+  @keyframes clay-float {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-6px);
+    }
+  }
+
+  .animate-clay-pulse {
+    animation: clay-pulse 3.6s ease-in-out infinite;
+  }
+  .animate-clay-rise {
+    animation: clay-rise 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+  .animate-clay-float {
+    animation: clay-float 6s ease-in-out infinite;
+  }
+
+}
+
+/* Respect users who ask for less motion: no floats, no drifting, no reveals. */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
   }
 }

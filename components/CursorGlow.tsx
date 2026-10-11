@@ -1,12 +1,13 @@
 "use client";
 
 import { useEffect, useRef, useSyncExternalStore } from "react";
+import { useReducedMotion } from "framer-motion";
 
 /** True when the device has a fine pointer (mouse). */
 function subscribe(callback: () => void) {
-  const mq = window.matchMedia("(pointer: fine)");
-  mq.addEventListener("change", callback);
-  return () => mq.removeEventListener("change", callback);
+  const query = window.matchMedia("(pointer: fine)");
+  query.addEventListener("change", callback);
+  return () => query.removeEventListener("change", callback);
 }
 
 function getSnapshot() {
@@ -18,43 +19,46 @@ function getServerSnapshot() {
 }
 
 /**
- * A small glowing dot that trails the cursor.
- * Desktop only, pointer-events none — the native cursor is never replaced.
+ * A soft halo that trails the cursor with heavy easing, so it reads as ambient
+ * light rather than a cursor replacement. Desktop pointers only, and disabled
+ * entirely for visitors who prefer reduced motion.
  */
 export function CursorGlow() {
-  const dotRef = useRef<HTMLDivElement>(null);
-  const enabled = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
+  const haloRef = useRef<HTMLDivElement>(null);
+  const hasFinePointer = useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
+  const reduceMotion = useReducedMotion();
+  const enabled = hasFinePointer && !reduceMotion;
 
   useEffect(() => {
     if (!enabled) return;
 
-    let x = window.innerWidth / 2;
-    let y = window.innerHeight / 2;
-    let tx = x;
-    let ty = y;
-    let raf = 0;
+    let currentX = window.innerWidth / 2;
+    let currentY = window.innerHeight / 2;
+    let targetX = currentX;
+    let targetY = currentY;
+    let frame = 0;
 
-    const onMove = (e: MouseEvent) => {
-      tx = e.clientX;
-      ty = e.clientY;
+    const onMove = (event: MouseEvent) => {
+      targetX = event.clientX;
+      targetY = event.clientY;
     };
 
     const tick = () => {
-      // ease the dot toward the cursor
-      x += (tx - x) * 0.18;
-      y += (ty - y) * 0.18;
-      if (dotRef.current) {
-        dotRef.current.style.transform = `translate3d(${x - 20}px, ${y - 20}px, 0)`;
+      // Slow easing keeps the halo calm instead of twitchy.
+      currentX += (targetX - currentX) * 0.075;
+      currentY += (targetY - currentY) * 0.075;
+      if (haloRef.current) {
+        haloRef.current.style.transform = `translate3d(${currentX - 128}px, ${currentY - 128}px, 0)`;
       }
-      raf = requestAnimationFrame(tick);
+      frame = requestAnimationFrame(tick);
     };
 
     window.addEventListener("mousemove", onMove, { passive: true });
-    raf = requestAnimationFrame(tick);
+    frame = requestAnimationFrame(tick);
 
     return () => {
       window.removeEventListener("mousemove", onMove);
-      cancelAnimationFrame(raf);
+      cancelAnimationFrame(frame);
     };
   }, [enabled]);
 
@@ -62,12 +66,11 @@ export function CursorGlow() {
 
   return (
     <div
-      ref={dotRef}
+      ref={haloRef}
       aria-hidden
       className="pointer-events-none fixed left-0 top-0 z-[100] hidden md:block"
     >
-      <div className="h-10 w-10 rounded-full bg-accent/20 blur-[6px]" />
-      <div className="absolute left-1/2 top-1/2 h-1.5 w-1.5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-accent" />
+      <div className="h-64 w-64 rounded-full bg-[radial-gradient(circle,rgba(169,164,242,0.13),rgba(169,164,242,0)_68%)]" />
     </div>
   );
 }

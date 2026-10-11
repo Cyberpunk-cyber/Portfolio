@@ -1,105 +1,140 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { ArrowUpRight, Check } from "lucide-react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faArrowUpRightFromSquare,
+  faCheck,
+  faStar,
+} from "@fortawesome/free-solid-svg-icons";
+import { faGithub } from "@fortawesome/free-brands-svg-icons";
 import { ProjectVisual } from "./ProjectVisual";
 import type { Project } from "@/data/projects";
 
-export function ProjectCard({ project }: { project: Project }) {
-  return (
-    <motion.article
-      whileHover={{ y: -4 }}
-      transition={{ type: "spring", stiffness: 300, damping: 24 }}
-      className="glow-border group relative overflow-hidden rounded-3xl border border-white/10 bg-white/[0.02]"
-    >
-      {/* Visual / screenshot area */}
-      <div className="relative aspect-[16/9] overflow-hidden">
-        <div className="h-full w-full transition-transform duration-500 group-hover:scale-[1.03]">
-          <ProjectVisual project={project} />
-        </div>
-        {project.featured && (
-          <span className="absolute left-4 top-4 rounded-full bg-accent px-3 py-1 text-[11px] font-semibold text-white backdrop-blur">
-            Featured
-          </span>
-        )}
-      </div>
+const linkClass =
+  "group/link inline-flex items-center gap-2 text-sm font-semibold transition-colors duration-300";
 
-      {/* Body */}
-      <div className="p-6 md:p-8">
-        <div className="flex items-start justify-between gap-4">
-          <div>
-            <h3 className="font-display text-2xl font-bold tracking-wide text-foreground">
+function FeatureList({ features, columns }: { features: string[]; columns: boolean }) {
+  return (
+    <ul className={`mt-5 grid gap-2.5 ${columns ? "sm:grid-cols-2" : ""}`}>
+      {features.map((feature) => (
+        <li key={feature} className="flex items-start gap-2.5 text-sm leading-relaxed text-muted">
+          <FontAwesomeIcon
+            icon={faCheck}
+            className="mt-1 h-2.5 w-2.5 shrink-0 text-accent-2"
+          />
+          {feature}
+        </li>
+      ))}
+    </ul>
+  );
+}
+
+function StackChips({ stack }: { stack: string[] }) {
+  return (
+    <div className="mt-6 flex flex-wrap gap-2">
+      {stack.map((tech) => (
+        <span
+          key={tech}
+          className="clay-inset rounded-full px-3 py-1.5 text-[0.7rem] font-medium text-foreground/80"
+        >
+          {tech}
+        </span>
+      ))}
+    </div>
+  );
+}
+
+function ProjectLinks({ project }: { project: Project }) {
+  return (
+    <div className="mt-7 flex flex-wrap items-center gap-3">
+      {project.demo && (
+        <a
+          href={project.demo}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="clay-pill inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-bold"
+        >
+          Live demo
+          <FontAwesomeIcon
+            icon={faArrowUpRightFromSquare}
+            className="h-3 w-3 transition-transform duration-300 group-hover/link:translate-x-0.5"
+          />
+        </a>
+      )}
+      <a
+        href={project.github}
+        target="_blank"
+        rel="noopener noreferrer"
+        className={`${linkClass} ${project.demo ? "clay-pill-quiet rounded-full px-5 py-2.5 font-semibold" : "clay-pill rounded-full px-5 py-2.5 font-bold"}`}
+      >
+        <FontAwesomeIcon icon={faGithub} className="h-3.5 w-3.5" />
+        Source code
+      </a>
+    </div>
+  );
+}
+
+export function ProjectCard({ project }: { project: Project }) {
+  /* Flagship project — always rendered first, in a wider two-column layout. */
+  if (project.featured) {
+    return (
+      <article className="clay clay-interactive group overflow-hidden rounded-[2rem]">
+        <div className="grid lg:grid-cols-[1.05fr_1fr]">
+          <div className="p-5 lg:p-7">
+            <div className="clay-inset relative h-full min-h-[260px] overflow-hidden rounded-[1.5rem]">
+              <ProjectVisual project={project} />
+              <span className="clay-icon absolute left-4 top-4 inline-flex items-center gap-2 rounded-full px-3 py-1.5 text-[10px] font-bold uppercase tracking-[0.16em] text-accent">
+                <FontAwesomeIcon icon={faStar} className="h-2.5 w-2.5" />
+                Flagship project
+              </span>
+            </div>
+          </div>
+
+          <div className="p-7 lg:py-9 lg:pr-9">
+            <h3 className="font-display text-2xl font-extrabold leading-tight text-foreground md:text-[1.75rem]">
               {project.name}
             </h3>
-            <p className="mt-1 text-sm text-accent">{project.tagline}</p>
+            <p className="mt-2 text-sm font-medium text-accent">{project.tagline}</p>
+            <p className="mt-4 text-sm leading-relaxed text-muted">{project.description}</p>
+
+            <p className="clay-inset mt-5 rounded-2xl px-5 py-4 text-sm italic leading-relaxed text-muted-2">
+              {project.problem}
+            </p>
+
+            <FeatureList features={project.features} columns />
+            <StackChips stack={project.stack} />
+            <ProjectLinks project={project} />
           </div>
-          <a
-            href={project.demo ?? project.github}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label={`${project.name} live demo`}
-            className="mt-1 flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-white/10 bg-white/5 text-muted transition-all group-hover:border-accent/50 group-hover:bg-accent/10 group-hover:text-accent"
-          >
-            <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-          </a>
         </div>
+      </article>
+    );
+  }
 
-        <p className="mt-4 leading-relaxed text-muted">{project.description}</p>
-
-        {project.featured && project.problem && (
-          <p className="mt-3 border-l-2 border-accent/40 pl-4 text-sm italic leading-relaxed text-muted-2">
-            {project.problem}
-          </p>
-        )}
-
-        {/* Feature bullets (featured only, keeps the card clean) */}
-        {project.featured && (
-          <ul className="mt-5 grid gap-2 sm:grid-cols-2">
-            {project.features.map((f) => (
-              <li key={f} className="flex items-start gap-2 text-sm text-muted">
-                <Check className="mt-0.5 h-3.5 w-3.5 shrink-0 text-accent" />
-                {f}
-              </li>
-            ))}
-          </ul>
-        )}
-
-        {/* Stack */}
-        <div className="mt-6 flex flex-wrap gap-2">
-          {project.stack.map((tech) => (
-            <span
-              key={tech}
-              className="rounded-full border border-white/10 bg-white/[0.04] px-3 py-1 text-xs font-medium text-foreground/90"
-            >
-              {tech}
-            </span>
-          ))}
-        </div>
-
-        {/* Links */}
-        <div className="mt-6 flex items-center gap-6">
-          {project.demo && (
-            <a
-              href={project.demo}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 text-sm font-semibold text-foreground transition-colors group-hover:text-accent"
-            >
-              Live Demo
-              <ArrowUpRight className="h-4 w-4" />
-            </a>
-          )}
-          <a
-            href={project.github}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 text-sm font-medium text-muted transition-colors hover:text-foreground"
-          >
-            GitHub
-            <ArrowUpRight className="h-4 w-4" />
-          </a>
+  /* Supporting projects — uniform cards in the grid below. */
+  return (
+    <article className="clay clay-interactive group flex h-full flex-col overflow-hidden rounded-[1.75rem]">
+      <div className="p-4">
+        <div className="clay-inset relative aspect-[16/9] overflow-hidden rounded-[1.25rem]">
+          <ProjectVisual project={project} />
         </div>
       </div>
-    </motion.article>
+
+      <div className="flex flex-1 flex-col p-6 pt-3">
+        <h3 className="font-display text-lg font-extrabold leading-snug text-foreground">
+          {project.name}
+        </h3>
+        <p className="mt-1.5 text-xs font-semibold uppercase tracking-[0.14em] text-accent">
+          {project.tagline}
+        </p>
+        <p className="mt-3 text-sm leading-relaxed text-muted">{project.description}</p>
+
+        <FeatureList features={project.features.slice(0, 3)} columns={false} />
+        <StackChips stack={project.stack} />
+
+        <div className="mt-auto">
+          <ProjectLinks project={project} />
+        </div>
+      </div>
+    </article>
   );
 }

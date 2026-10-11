@@ -1,12 +1,12 @@
 export const SITE = {
   name: "Ghous Muhammad",
   shortName: "GHOUS",
-  title: "Full-stack developer & AI builder",
-  tagline: "I turn ambitious ideas into useful software.",
+  title: "Full-Stack Developer & AI Engineer",
+  tagline: "I design and build AI-powered software that ships.",
   description:
-    "CS student at UCP building polished web applications, AI-powered products, and practical automations that solve real problems.",
+    "Computer Science student and full-stack developer building LLM-powered products — conversational support platforms with retrieval-augmented generation, agent-style assistants, and production-ready web applications.",
   location: "Pakistan",
-  availability: "Open to internships & freelance",
+  availability: "Open to internships & freelance work",
   email: "muhammadghous044@gmail.com",
   socials: {
     github: "https://github.com/Cyberpunk-Cyber",
@@ -15,48 +15,55 @@ export const SITE = {
   stats: {
     yearsLearning: "1+",
     projects: "6+",
-    technologies: "15+",
+    technologies: "18+",
   },
   about: [
-    "I'm a CS student at UCP who got into development because I wanted to understand how the things I saw on the internet were made — then build better versions of my own.",
-    "My work now sits at the intersection of full-stack development and AI: responsive interfaces, Python backends, database systems, RAG pipelines, and assistants that can do more than generate a reply.",
-    "I learn by shipping. Every project gives me a new system to understand, a sharper problem to solve, and one more reason to keep building.",
+    "I'm a Computer Science student who builds software to understand how it works. That habit turned into a focus on full-stack engineering and applied AI — products that are useful beyond a demo.",
+    "My work sits where web engineering meets language models: responsive interfaces, Python and FastAPI backends, relational and vector databases, retrieval pipelines that ground answers in real documents, and tool-calling designs that let an assistant take an action instead of only replying.",
+    "I learn by shipping. Each project adds a new system to understand — data modelling, retrieval quality, API security, deployment — and each one raises the bar for the next.",
   ],
   journey: [
     {
       year: "2025",
-      title: "Started BS Computer Science",
-      description: "University of Central Punjab. Finally learning why my code actually breaks.",
+      title: "Started a BS in Computer Science",
+      description:
+        "University of Central Punjab. Built the fundamentals — programming, data structures, databases — that everything since has rested on.",
     },
     {
       year: "2025",
-      title: "Found my way into web development",
-      description: "HTML, CSS, JavaScript, then React and Next.js. I started with interfaces and gradually learned how to build the systems behind them.",
+      title: "Moved into web development",
+      description:
+        "Progressed from HTML, CSS and JavaScript to React and Next.js, learning to build the interface and the system behind it.",
     },
     {
       year: "2026",
-      title: "Started building with AI",
-      description: "Moved from simple API experiments to LLM integrations, structured prompts, retrieval, and the engineering needed to make AI useful.",
+      title: "Started building with language models",
+      description:
+        "Went beyond single API calls into prompt design, embeddings, retrieval, and the engineering needed to make an LLM useful in a real product.",
     },
     {
       year: "2026",
       title: "Went full-stack",
-      description: "Databases, Docker, APIs, and deployment — the essential foundations that turn an impressive idea into a working product.",
+      description:
+        "Databases, REST APIs, authentication, Docker and deployment — the parts that turn a working prototype into a dependable application.",
     },
     {
       year: "2026",
-      title: "Built JARVIS",
-      description: "A personal AI assistant with weather, web search, local file discovery, party mode, and multiple capabilities inside one interface.",
+      title: "Built an AI customer support platform",
+      description:
+        "Designed tiered conversational support, then extended it with document ingestion, pgvector retrieval, tool execution, and confirmation flows for sensitive actions.",
     },
     {
       year: "2026",
-      title: "Designed an AI support platform",
-      description: "Explored the progression from conversational support to RAG-powered knowledge retrieval, tool execution, confirmations, and business automation.",
+      title: "Built JARVIS, a personal AI assistant",
+      description:
+        "Unified weather, web search, local file discovery, and other capabilities behind one interface — an exercise in tool integration and assistant design.",
     },
     {
       year: "2026",
-      title: "Streamlit experiments",
-      description: "Built a slot machine simulator in Streamlit — fun way to learn interactive Python web apps.",
+      title: "Explored what happens beneath the API",
+      description:
+        "Trained a small language model from scratch, attempted a larger-scale run, and fine-tuned Llama 3.2 — learning firsthand where hardware and data quality set the ceiling.",
     },
   ],
   education: {
@@ -64,11 +71,11 @@ export const SITE = {
     degree: "BS Computer Science",
     period: "2025 — Present",
     areas: [
-      "Programming",
-      "Data Structures",
-      "Digital Logic Design",
-      "Web Development",
+      "Programming Fundamentals",
+      "Data Structures & Algorithms",
       "Database Systems",
+      "Web Development",
+      "Digital Logic Design",
     ],
   },
   github: {

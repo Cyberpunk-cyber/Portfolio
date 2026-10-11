@@ -1,8 +1,9 @@
 "use client";
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faGraduationCap } from "@fortawesome/free-solid-svg-icons";
 import { Section } from "./Section";
 import { Reveal } from "./Reveal";
-import { GraduationCap } from "lucide-react";
 import { SITE } from "@/data/site";
 
 export function Journey() {
@@ -12,63 +13,63 @@ export function Journey() {
       index="04"
       eyebrow="Journey"
       title={<>Built one project at a time.</>}
-      description="The path from curious student to full-stack builder working at the edge of web development and AI."
+      description="From a first line of HTML to retrieval pipelines and deployed products — the path so far, and what each stage taught me."
     >
-      <div className="grid gap-14 lg:grid-cols-5">
+      <div className="grid gap-12 lg:grid-cols-5 lg:gap-10">
         {/* Timeline */}
         <div className="relative lg:col-span-3">
-          <div className="absolute bottom-2 left-[7px] top-2 w-px bg-gradient-to-b from-accent/60 via-white/10 to-transparent" />
-          <div className="space-y-10">
-            {SITE.journey.map((step, i) => (
-              <Reveal key={`${step.year}-${step.title}`} delay={i * 0.05}>
-                <div className="relative pl-8">
-                  <span className="absolute left-0 top-1.5 flex h-[15px] w-[15px] items-center justify-center">
-                    <span className="absolute h-full w-full rounded-full bg-accent/30" />
-                    <span className="relative h-[7px] w-[7px] rounded-full bg-accent" />
+          <div className="clay-inset absolute bottom-2 left-[15px] top-2 w-[3px] rounded-full" />
+
+          <ul className="space-y-6">
+            {SITE.journey.map((step, index) => (
+              <Reveal key={`${step.year}-${step.title}`} delay={index * 0.05}>
+                <li className="relative pl-12">
+                  <span className="clay-icon absolute left-0 top-1 flex h-8 w-8 items-center justify-center rounded-full">
+                    <span className="h-2 w-2 rounded-full bg-accent" />
                   </span>
-                  <div className="font-mono text-xs uppercase tracking-widest text-accent">
+                  <div className="text-[10px] font-bold uppercase tracking-[0.24em] text-accent">
                     {step.year}
                   </div>
-                  <h3 className="mt-1 font-display text-lg font-bold text-foreground">
+                  <h3 className="mt-1.5 font-display text-base font-extrabold text-foreground">
                     {step.title}
                   </h3>
                   <p className="mt-1.5 max-w-md text-sm leading-relaxed text-muted">
                     {step.description}
                   </p>
-                </div>
+                </li>
               </Reveal>
             ))}
-          </div>
+          </ul>
         </div>
 
         {/* Education */}
         <Reveal className="lg:col-span-2" delay={0.15}>
-          <div className="glass sticky top-24 rounded-2xl p-6 md:p-7">
-            <div className="flex items-center gap-3">
-              <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-accent/15 ring-1 ring-accent/30">
-                <GraduationCap className="h-5 w-5 text-accent" />
+          <div className="clay sticky top-24 rounded-[1.75rem] p-7">
+            <div className="flex items-start gap-4">
+              <span className="clay-icon flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl">
+                <FontAwesomeIcon icon={faGraduationCap} className="h-5 w-5 text-accent-2" />
               </span>
               <div>
-                <h3 className="font-display text-base font-bold text-foreground">
+                <h3 className="font-display text-base font-extrabold leading-snug text-foreground">
                   {SITE.education.university}
                 </h3>
-                <p className="text-sm text-muted">
+                <p className="mt-1 text-sm text-muted">
                   {SITE.education.degree} · {SITE.education.period}
                 </p>
               </div>
             </div>
 
             <div className="mt-6">
-              <div className="mb-3 text-xs font-medium uppercase tracking-widest text-muted-2">
-                Relevant Areas
+              <div className="mb-3 text-[10px] font-semibold uppercase tracking-[0.24em] text-muted-2">
+                Coursework areas
               </div>
-              <ul className="space-y-2.5">
+              <ul className="space-y-2">
                 {SITE.education.areas.map((area) => (
                   <li
                     key={area}
-                    className="flex items-center gap-2.5 text-sm text-foreground/85"
+                    className="clay-inset flex items-center gap-3 rounded-2xl px-4 py-2.5 text-sm text-foreground/85"
                   >
-                    <span className="h-1 w-1 rounded-full bg-accent" />
+                    <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />
                     {area}
                   </li>
                 ))}

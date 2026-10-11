@@ -8,10 +8,12 @@ import { GitHub } from "@/components/GitHub";
 import { Contact } from "@/components/Contact";
 import { Footer } from "@/components/Footer";
 import { CursorGlow } from "@/components/CursorGlow";
+import { ScrollProgress } from "@/components/ScrollProgress";
 
 export default function Home() {
   return (
     <>
+      <ScrollProgress />
       <Navbar />
       <main>
         <Hero />

@@ -6,27 +6,28 @@ import { ProjectCard } from "./ProjectCard";
 import { PROJECTS } from "@/data/projects";
 
 export function Projects() {
-  const featured = PROJECTS.find((p) => p.featured);
-  const rest = PROJECTS.filter((p) => !p.featured);
+  /* The flagship platform always leads the section. */
+  const flagship = PROJECTS.find((project) => project.featured);
+  const supporting = PROJECTS.filter((project) => !project.featured);
 
   return (
     <Section
       id="projects"
       index="03"
       eyebrow="Projects"
-      title={<>Ideas, engineered into reality.</>}
-      description="A selection of AI products, full-stack applications, and experiments that pushed me to learn faster and build smarter."
+      title={<>Products I designed, built, and shipped.</>}
+      description="AI platforms, full-stack applications, and data pipelines — each one built end to end and each one described precisely, including what it does and what it does not yet do."
     >
       <div className="space-y-8">
-        {featured && (
+        {flagship && (
           <Reveal>
-            <ProjectCard project={featured} />
+            <ProjectCard project={flagship} />
           </Reveal>
         )}
 
-        <div className="grid gap-8 md:grid-cols-2">
-          {rest.map((project, i) => (
-            <Reveal key={project.name} delay={i * 0.08}>
+        <div className="grid gap-6 md:grid-cols-2">
+          {supporting.map((project, index) => (
+            <Reveal key={project.name} delay={index * 0.07} className="h-full">
               <ProjectCard project={project} />
             </Reveal>
           ))}
