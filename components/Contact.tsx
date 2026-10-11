@@ -7,6 +7,7 @@ import {
   faArrowUpRightFromSquare,
   faCircleCheck,
   faCircleInfo,
+  faClock,
   faEnvelope,
   faPaperPlane,
   faSpinner,
@@ -27,7 +28,9 @@ const inputClass =
 
 export function Contact() {
   const reduceMotion = useReducedMotion();
-  const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
+  const [status, setStatus] = useState<
+    "idle" | "sending" | "sent" | "rate-limited" | "error"
+  >("idle");
   const [form, setForm] = useState({ name: "", email: "", message: "" });
 
   const handleSubmit = async (event: React.FormEvent) => {
@@ -39,6 +42,10 @@ export function Contact() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(form),
       });
+      if (response.status === 429) {
+        setStatus("rate-limited");
+        return;
+      }
       if (!response.ok) throw new Error("Request failed");
       setStatus("sent");
       setForm({ name: "", email: "", message: "" });
@@ -190,6 +197,16 @@ export function Contact() {
                   <FontAwesomeIcon icon={faCircleCheck} className="h-4 w-4" />
                   Message sent — I&apos;ll reply soon.
                 </motion.span>
+              )}
+
+              {status === "rate-limited" && (
+                <span
+                  className="inline-flex items-center gap-2 text-sm text-accent"
+                  role="alert"
+                >
+                  <FontAwesomeIcon icon={faClock} className="h-4 w-4" />
+                  Too many messages just now — please try again shortly.
+                </span>
               )}
 
               {status === "error" && (

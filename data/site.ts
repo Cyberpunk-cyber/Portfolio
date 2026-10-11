@@ -84,10 +84,27 @@ export const SITE = {
 } as const;
 
 /**
- * Canonical site URL — override with `NEXT_PUBLIC_SITE_URL` (e.g. on Vercel
- * set it to your production domain). Used by metadataBase, sitemap, robots.
+ * Canonical site URL — override with `NEXT_PUBLIC_SITE_URL` (e.g. on Vercel set
+ * it to your production domain). Used by metadataBase, sitemap and robots.
+ *
+ * An empty or malformed value falls back to the default: environment variables
+ * defined-but-blank are common on hosting dashboards, and `new URL("")` throws,
+ * which would otherwise fail the whole build.
  */
-export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://ghous-muhammad.dev";
+const FALLBACK_SITE_URL = "https://ghous-muhammad.dev";
+
+function resolveSiteUrl(): string {
+  const configured = process.env.NEXT_PUBLIC_SITE_URL?.trim();
+  if (!configured) return FALLBACK_SITE_URL;
+
+  try {
+    return new URL(configured).origin;
+  } catch {
+    return FALLBACK_SITE_URL;
+  }
+}
+
+export const SITE_URL = resolveSiteUrl();
 
 export const NAV_LINKS = [
   { label: "About", href: "#about" },
