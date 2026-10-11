@@ -84,24 +84,43 @@ export const SITE = {
 } as const;
 
 /**
- * Canonical site URL — override with `NEXT_PUBLIC_SITE_URL` (e.g. on Vercel set
- * it to your production domain). Used by metadataBase, sitemap and robots.
+ * Canonical site URL — used by metadataBase, canonical tags, sitemap and robots.
  *
- * An empty or malformed value falls back to the default: environment variables
- * defined-but-blank are common on hosting dashboards, and `new URL("")` throws,
- * which would otherwise fail the whole build.
+ * Resolved in order, first valid value wins:
+ *   1. NEXT_PUBLIC_SITE_URL          – explicit override (set this to your domain)
+ *   2. VERCEL_PROJECT_PRODUCTION_URL – injected by Vercel, tracks your production
+ *                                      domain automatically, including custom ones
+ *   3. VERCEL_URL                    – the deployment's own preview URL
+ *   4. FALLBACK_SITE_URL             – last resort so a build never emits a dead
+ *                                      domain or throws on an unset variable
+ *
+ * Values are validated rather than trusted: hosting dashboards routinely define a
+ * variable as an empty string, and `new URL("")` throws, which would fail the
+ * whole build.
  */
-const FALLBACK_SITE_URL = "https://ghous-muhammad.dev";
+const FALLBACK_SITE_URL = "https://ghous-portfolio.vercel.app";
 
-function resolveSiteUrl(): string {
-  const configured = process.env.NEXT_PUBLIC_SITE_URL?.trim();
-  if (!configured) return FALLBACK_SITE_URL;
+function normalizeSiteUrl(value: string | undefined): string | null {
+  const configured = value?.trim();
+  if (!configured) return null;
+
+  // Vercel's own variables come through as bare hosts (no protocol).
+  const withProtocol = /^https?:\/\//i.test(configured) ? configured : `https://${configured}`;
 
   try {
-    return new URL(configured).origin;
+    return new URL(withProtocol).origin;
   } catch {
-    return FALLBACK_SITE_URL;
+    return null;
   }
+}
+
+function resolveSiteUrl(): string {
+  return (
+    normalizeSiteUrl(process.env.NEXT_PUBLIC_SITE_URL) ??
+    normalizeSiteUrl(process.env.VERCEL_PROJECT_PRODUCTION_URL) ??
+    normalizeSiteUrl(process.env.VERCEL_URL) ??
+    FALLBACK_SITE_URL
+  );
 }
 
 export const SITE_URL = resolveSiteUrl();
