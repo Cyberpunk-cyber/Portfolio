@@ -19,7 +19,7 @@ export function Footer() {
             {SITE.shortName}
           </span>
           <span className="text-xs text-muted-2">
-            Designed &amp; built by {SITE.name} · © {new Date().getFullYear()}
+            Crafted with curiosity by {SITE.name} · © {new Date().getFullYear()}
           </span>
         </div>
 

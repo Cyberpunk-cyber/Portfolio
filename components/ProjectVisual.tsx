@@ -1,4 +1,4 @@
-import { ArrowUpRight, CloudSun, Database, Globe, User, Zap, Gamepad2 } from "lucide-react";
+import { CloudSun, Database, User, Zap, Gamepad2, MessageSquare, Bot } from "lucide-react";
 import type { Project } from "@/data/projects";
 
 /**
@@ -7,6 +7,8 @@ import type { Project } from "@/data/projects";
  */
 export function ProjectVisual({ project }: { project: Project }) {
   switch (project.visual) {
+    case "chatbot":
+      return <ChatbotVisual />;
     case "jarvis":
       return <JarvisVisual />;
     case "contacts":
@@ -19,6 +21,32 @@ export function ProjectVisual({ project }: { project: Project }) {
       return <GamblingVisual />;
 
   }
+}
+
+function ChatbotVisual() {
+  return (
+    <Frame>
+      <div className="relative z-10 w-64 space-y-3">
+        <div className="flex items-center gap-2 text-[10px] uppercase tracking-[0.2em] text-accent">
+          <Bot className="h-4 w-4" /> support intelligence
+        </div>
+        <div className="ml-auto max-w-[78%] rounded-2xl rounded-br-md border border-accent/20 bg-accent/10 px-3 py-2 text-[10px] text-foreground/80">
+          How can I help your customers today?
+        </div>
+        <div className="flex max-w-[82%] items-start gap-2 rounded-2xl rounded-bl-md border border-white/10 bg-white/[0.05] px-3 py-2 text-[10px] text-muted">
+          <MessageSquare className="mt-0.5 h-3 w-3 shrink-0 text-accent" />
+          Search knowledge, book appointments, and automate the next step.
+        </div>
+        <div className="flex gap-2 pt-1">
+          {["RAG", "Tools", "CRM"].map((label) => (
+            <span key={label} className="rounded-full border border-accent/20 bg-accent/10 px-2.5 py-1 text-[9px] text-accent">
+              {label}
+            </span>
+          ))}
+        </div>
+      </div>
+    </Frame>
+  );
 }
 
 function Frame({ children }: { children: React.ReactNode }) {

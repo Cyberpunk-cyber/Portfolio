@@ -1,10 +1,10 @@
 export const SITE = {
   name: "Ghous Muhammad",
   shortName: "GHOUS",
-  title: "Developer & AI Builder",
-  tagline: "I build web apps and mess around with AI.",
+  title: "Full-stack developer & AI builder",
+  tagline: "I turn ambitious ideas into useful software.",
   description:
-    "CS student at UCP. I like building web apps, automating things with AI, and figuring out how to make software that actually works.",
+    "CS student at UCP building polished web applications, AI-powered products, and practical automations that solve real problems.",
   location: "Pakistan",
   availability: "Open to internships & freelance",
   email: "muhammadghous044@gmail.com",
@@ -18,9 +18,9 @@ export const SITE = {
     technologies: "15+",
   },
   about: [
-    "I'm a CS student at UCP who got into development because I wanted to build the things I saw on the internet.",
-    "Most of what I know came from actually building stuff — starting with HTML and CSS, and somehow ending up writing Python backends and wiring up LLMs.",
-    "I don't have a fancy title yet. I just like making things work.",
+    "I'm a CS student at UCP who got into development because I wanted to understand how the things I saw on the internet were made — then build better versions of my own.",
+    "My work now sits at the intersection of full-stack development and AI: responsive interfaces, Python backends, database systems, RAG pipelines, and assistants that can do more than generate a reply.",
+    "I learn by shipping. Every project gives me a new system to understand, a sharper problem to solve, and one more reason to keep building.",
   ],
   journey: [
     {
@@ -30,23 +30,28 @@ export const SITE = {
     },
     {
       year: "2025",
-      title: "Picked up Web Dev",
-      description: "HTML, CSS, JS, then React and Next.js. Built a few things that actually worked, which felt pretty good.",
+      title: "Found my way into web development",
+      description: "HTML, CSS, JavaScript, then React and Next.js. I started with interfaces and gradually learned how to build the systems behind them.",
     },
     {
       year: "2026",
-      title: "Started messing with AI",
-      description: "Turns out AI isn't magic — it's mostly API calls and hoping the prompt is good enough.",
+      title: "Started building with AI",
+      description: "Moved from simple API experiments to LLM integrations, structured prompts, retrieval, and the engineering needed to make AI useful.",
     },
     {
       year: "2026",
-      title: "Full-stack stuff",
-      description: "Databases, Docker, deployment — the boring parts that make everything else actually run.",
+      title: "Went full-stack",
+      description: "Databases, Docker, APIs, and deployment — the essential foundations that turn an impressive idea into a working product.",
     },
     {
       year: "2026",
-      title: "Building AURA OS (MY-JARVIS)",
-      description: "My biggest project so far. An AI agent with a working tool-calling loop against real Postgres data.",
+      title: "Built JARVIS",
+      description: "A personal AI assistant with weather, web search, local file discovery, party mode, and multiple capabilities inside one interface.",
+    },
+    {
+      year: "2026",
+      title: "Designed an AI support platform",
+      description: "Explored the progression from conversational support to RAG-powered knowledge retrieval, tool execution, confirmations, and business automation.",
     },
     {
       year: "2026",

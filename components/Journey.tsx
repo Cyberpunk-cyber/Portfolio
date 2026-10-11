@@ -11,8 +11,8 @@ export function Journey() {
       id="journey"
       index="04"
       eyebrow="Journey"
-      title={<>How I got here.</>}
-      description="Still early in the climb — the part where you learn the most."
+      title={<>Built one project at a time.</>}
+      description="The path from curious student to full-stack builder working at the edge of web development and AI."
     >
       <div className="grid gap-14 lg:grid-cols-5">
         {/* Timeline */}

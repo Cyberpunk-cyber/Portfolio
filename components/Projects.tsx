@@ -14,8 +14,8 @@ export function Projects() {
       id="projects"
       index="03"
       eyebrow="Projects"
-      title={<>A few things I&apos;ve built.</>}
-      description="Things I've actually built and learned from. The ones that survived, at least."
+      title={<>Ideas, engineered into reality.</>}
+      description="A selection of AI products, full-stack applications, and experiments that pushed me to learn faster and build smarter."
     >
       <div className="space-y-8">
         {featured && (

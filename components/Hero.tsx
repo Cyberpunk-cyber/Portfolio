@@ -58,7 +58,7 @@ export function Hero() {
           variants={item}
           className="mt-5 max-w-2xl font-display text-xl font-semibold leading-snug tracking-wide text-foreground/90 sm:text-2xl md:text-3xl"
         >
-          I build web apps and{" "}
+          I build full-stack products and{" "}
           <span className="inline-flex items-center gap-1 text-gradient">
             <Sparkles className="h-5 w-5" />
             mess around with AI.
@@ -79,7 +79,7 @@ export function Hero() {
             href="#projects"
             className="group inline-flex items-center justify-center gap-2 rounded-full bg-accent px-7 py-3.5 text-sm font-semibold text-white transition-all hover:bg-accent/90 hover:shadow-[0_0_40px_-8px_rgba(124,58,237,0.7)]"
           >
-            View My Work
+            Explore My Work
             <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
           </a>
           <a

@@ -21,20 +21,24 @@ export const metadata: Metadata = {
     template: `%s | ${SITE.name}`,
   },
   description:
-    "Portfolio of Ghous Muhammad, a Computer Science student and developer building modern web applications and AI-powered software.",
+    "Portfolio of Ghous Muhammad, a full-stack developer and Computer Science student building AI-powered products, web applications, and practical automations.",
   keywords: [
     "Ghous Muhammad",
     "developer",
-    "AI builder",
+    "AI engineer",
     "full-stack developer",
     "web development",
+    "AI applications",
+    "RAG",
+    "FastAPI",
+    "Python",
     "Next.js",
     "portfolio",
   ],
   openGraph: {
     title: "Ghous Muhammad — Developer & AI Builder",
     description:
-      "Building modern web applications and AI-powered software.",
+      "Full-stack development, AI-powered products, and practical automation.",
     url: SITE_URL,
     siteName: SITE.name,
     locale: "en_US",
@@ -44,7 +48,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Ghous Muhammad — Developer & AI Builder",
     description:
-      "Building modern web applications and AI-powered software.",
+      "Full-stack development, AI-powered products, and practical automation.",
   },
   robots: {
     index: true,

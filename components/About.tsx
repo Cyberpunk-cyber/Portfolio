@@ -5,7 +5,7 @@ import { Reveal } from "./Reveal";
 import { SITE } from "@/data/site";
 
 const STATS = [
-  { value: SITE.stats.yearsLearning, label: "Year of building" },
+  { value: SITE.stats.yearsLearning, label: "Year of focused building" },
   { value: SITE.stats.projects, label: "Projects shipped" },
   { value: SITE.stats.technologies, label: "Technologies I've touched" },
 ];

@@ -9,27 +9,52 @@ export type Project = {
   demo?: string;
   featured?: boolean;
   /** Used to render an abstract visual placeholder until a real screenshot exists */
-  visual: "jarvis" | "contacts" | "weather" | "scraper" | "gambling" | "techsspire";
+  visual: "chatbot" | "jarvis" | "contacts" | "weather" | "scraper" | "gambling" | "techsspire";
 };
 
 export const PROJECTS: Project[] = [
   {
-    name: "JARVIS AI Agent",
-    tagline: "AI agent that does more than just chat",
+    name: "AI Customer Support Platform",
+    tagline: "From helpful chat to intelligent business workflows",
     description:
-      "An AI agent system with a working tool-calling loop that queries real Postgres data. Built with FastAPI backend and planned Next.js frontend. The kind of project you keep building late at night.",
+      "A multi-tier customer support platform that grows from conversational assistance into knowledge-grounded answers and action-oriented automation. It brings together full-stack engineering, modern LLM integration, and product thinking in one cohesive system.",
     problem:
-      "Every AI tool is just a chat box. I wanted to see how far I could push an agent - having it act, query real data, and chain multiple tool calls together.",
+      "Most support chatbots stop at conversation. I wanted to design a clearer path from answering questions to understanding business knowledge, taking approved actions, and fitting naturally into a team's workflow.",
     features: [
-      "Tool-calling loop with Google Gemini LLM",
-      "Multi-tenant Postgres data access",
-      "Dockerized backend with FastAPI",
-      "Planned Next.js frontend with glass UI",
+      "Basic tier for reliable conversational support",
+      "Standard tier with document processing, embeddings, PostgreSQL, pgvector, and RAG",
+      "Premium architecture for tool execution, appointments, confirmations, CRM, and automation",
+      "Tenant isolation, API security, rate limiting, and automated testing",
     ],
-    stack: ["Python", "FastAPI", "PostgreSQL", "Docker", "Google Gemini API", "Next.js"],
+    stack: [
+      "Python",
+      "FastAPI",
+      "LLM APIs",
+      "PostgreSQL",
+      "pgvector",
+      "RAG",
+      "REST APIs",
+    ],
+    github: "https://github.com/Cyberpunk-Cyber",
+    featured: true,
+    visual: "chatbot",
+  },
+  {
+    name: "JARVIS AI Agent",
+    tagline: "A personal AI assistant with real tools",
+    description:
+      "A personal AI assistant that combines weather updates, web search, local file discovery, a party mode, and a JavaScript self-destruct feature behind one interface. It is a hands-on exploration of tool integration and agent-style workflows.",
+    problem:
+      "I wanted to build something more alive than another chat box: one assistant that can understand a request, choose the right capability, and bring the result back through a focused interface.",
+    features: [
+      "Weather information with a visual weather card",
+      "Local file searching and web searching",
+      "Party mode and a JavaScript self-destruct feature",
+      "Multiple capabilities unified in one personal assistant",
+    ],
+    stack: ["Python", "JavaScript", "APIs", "Local File Search", "Web Search"],
     github: "https://github.com/Cyberpunk-Cyber/MY-JARVIS",
     demo: "https://aura-os-gold.vercel.app",
-    featured: true,
     visual: "jarvis",
   },
   {

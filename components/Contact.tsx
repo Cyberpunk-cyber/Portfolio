@@ -45,18 +45,17 @@ export function Contact() {
       eyebrow="Contact"
       title={
         <>
-          Want to work{" "}
-          <span className="text-gradient">together?</span>
+          Let&apos;s build something{" "}
+          <span className="text-gradient">worth talking about.</span>
         </>
       }
-      description="Internship, freelance, or just a project you want to talk about — my inbox is open."
+      description="Have an ambitious product, an AI workflow, or an opportunity in mind? I&apos;d love to hear what you&apos;re working on."
     >
       <div className="grid gap-12 lg:grid-cols-5 lg:gap-16">
         {/* Left — socials */}
         <Reveal className="lg:col-span-2" delay={0.05}>
           <p className="text-lg leading-relaxed text-muted">
-            Whether it&apos;s an internship, a freelance project, or just a wild
-            idea — my inbox is open.
+            I&apos;m open to internships, freelance projects, collaborations, and thoughtful conversations about building useful software.
           </p>
           <div className="mt-8 flex flex-col gap-3">
             {SOCIALS.map((s) => (
@@ -113,7 +112,7 @@ export function Contact() {
             </div>
             <div className="mt-5">
               <label htmlFor="message" className="mb-2 block text-xs font-medium uppercase tracking-widest text-muted">
-                Tell me about your project
+                Tell me what you&apos;re building
               </label>
               <textarea
                 id="message"

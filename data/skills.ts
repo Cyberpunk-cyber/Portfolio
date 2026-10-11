@@ -6,8 +6,21 @@ export type SkillCategory = {
 
 export const SKILLS: SkillCategory[] = [
   {
+    title: "AI & Intelligent Systems",
+    description: "Designing assistants that can understand, retrieve, and act",
+    skills: [
+      "LLMs",
+      "RAG",
+      "Embeddings",
+      "Tool Calling",
+      "OpenRouter",
+      "Ollama",
+      "Google Gemini API",
+    ],
+  },
+  {
     title: "Frontend",
-    description: "Crafting responsive, accessible interfaces",
+    description: "Crafting polished, responsive digital experiences",
     skills: [
       "HTML",
       "CSS",
@@ -20,7 +33,7 @@ export const SKILLS: SkillCategory[] = [
   },
   {
     title: "Backend",
-    description: "Designing APIs and data systems",
+    description: "Building reliable APIs and data systems",
     skills: [
       "Python",
       "FastAPI",
@@ -31,13 +44,9 @@ export const SKILLS: SkillCategory[] = [
     ],
   },
   {
-    title: "AI / Tools",
-    description: "Building intelligent, automated workflows",
+    title: "Engineering & Delivery",
+    description: "Taking projects from local build to working product",
     skills: [
-      "LLMs",
-      "OpenRouter",
-      "Ollama",
-      "Google Gemini API",
       "Docker",
       "Git",
       "GitHub",
@@ -47,7 +56,7 @@ export const SKILLS: SkillCategory[] = [
   },
   {
     title: "Python Ecosystem",
-    description: "Data, automation & interactive apps",
+    description: "Data, automation, and interactive applications",
     skills: [
       "Streamlit",
       "Web Scraping",

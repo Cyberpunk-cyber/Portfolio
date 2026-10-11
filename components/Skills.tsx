@@ -13,7 +13,7 @@ export function Skills() {
       title={<>What I work with.</>}
       description="Grouped by where I use them — everything here is something I can talk through in an interview."
     >
-      <div className="grid gap-5 md:grid-cols-3">
+      <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
         {SKILLS.map((category, ci) => (
           <Reveal key={category.title} delay={ci * 0.1}>
             <div className="glass group flex h-full flex-col rounded-2xl p-6 transition-all duration-300 hover:-translate-y-1 hover:border-accent/40">

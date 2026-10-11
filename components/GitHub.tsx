@@ -84,8 +84,8 @@ export function GitHub() {
       id="github"
       index="05"
       eyebrow="GitHub"
-      title={<>Where my code lives.</>}
-      description="Most of my experiments end up on GitHub, whether they work or not."
+      title={<>The work behind the work.</>}
+      description="Explore the repositories, experiments, and systems behind the projects featured here."
     >
       <Reveal>
         <div className="glass rounded-3xl p-6 md:p-10">
@@ -135,7 +135,7 @@ export function GitHub() {
             {/* Contribution grid */}
             <div className="flex-1">
               <div className="flex items-center justify-between text-xs text-muted">
-                <span>Last year of activity</span>
+                <span>Recent activity</span>
                 <div className="flex items-center gap-1.5">
                   <span>Less</span>
                   {LEVELS.map((l) => (
